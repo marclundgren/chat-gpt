@@ -1,9 +1,8 @@
 import openai
 import sys
 
-# data = sys.argv[1]
 # join the list of strings into a single string
-data = " ".join(sys.argv[1:])
+cli_prompt = " ".join(sys.argv[1:])
 
 # Read the API key from a file and store the key
 key_file = open("key.txt", "r")
@@ -14,7 +13,7 @@ key_file.close()
 openai.api_key = key
 
 # Use the ChatGPT model to generate text
-model_engine = "text-davinci-003"
+model_engine = "text-davinci-002"
 
 fallback_prompt = """
 take this text and generate a markdown table:
@@ -31,7 +30,7 @@ Davinci
 text-davinci-003	Davinci, in its current version 003, corresponds to ChatGPT (GPT3.5). It is a versatile model that can perform a wide range of tasks, often with fewer specific instructions. It excels in tasks that require a deep understanding of content, such as summary generation and creative writing. However, it requires more computational resources and may not be as fast or cost-effective as other models.
 """
 
-prompt = data or fallback_prompt
+prompt = cli_prompt or fallback_prompt
 
 completion = openai.Completion.create(engine=model_engine, prompt=prompt, max_tokens=1024, n=1,stop=None,temperature=0.7)
 message = completion.choices[0].text
