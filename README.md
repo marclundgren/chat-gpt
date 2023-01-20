@@ -2,7 +2,7 @@
 
 ## Setup
 
-### Add openai api key to `key.txt`
+### Add [your openai api key](https://beta.openai.com/account/api-keys) to `key.txt`
 
 ```sh
 echo "YOUR KEY" > key.txt
